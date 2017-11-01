@@ -1,15 +1,42 @@
 const path = require('path');
+const LiveReloadPlugin = require('webpack-livereload-plugin');
 
-const dev_config = {
-  DIST_DIR: './build',
-  SOURCE_DIR: path.resolve(__dirname + '/src'),
-  PROJECT_DIR: __dirname
+module.exports = {
+  entry: './server/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'ui/dist')
+  },
+  context: __dirname,
+  resolve: {
+    extensions: ['.js', '.jsx', '.json', '*']
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['react', 'es2015']
+        }
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      }
+    ]
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.COSMIC_BUCKET': JSON.stringify(process.env.COSMIC_BUCKET),
+      'process.env.COSMIC_READ_KEY': JSON.stringify(
+        process.env.COSMIC_READ_KEY
+      ),
+      'process.env.COSMIC_WRITE_KEY': JSON.stringify(
+        process.env.COSMIC_WRITE_KEY
+      )
+    }),
+    new LiveReloadPlugin({appendScriptTag: true})
+  ]
 };
-
-function buildConfig(env) {
-  env = env || 'dev';
-  var config = dev_config;
-  return require('./config/' + env + '.js')(env, config);
-}
-
-module.exports = buildConfig;
