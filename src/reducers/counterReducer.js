@@ -1,9 +1,17 @@
-const counterReducer = (state = 0, action) => {
+const initialState = {
+  counter: 0
+};
+
+const counterReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'INCREMENT':
-      return state + 1;
+      const incrementedCounter = state.counter + 1;
+      return Object.assign({}, state, {counter: incrementedCounter});
+
     case 'DECREMENT':
-      return state - 1;
+      const decrementedCounter = state.counter - 1;
+      return Object.assign({}, state, {counter: decrementedCounter});
+
     default:
       return state;
   }
