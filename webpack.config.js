@@ -1,31 +1,33 @@
-const path = require('path');
-const LiveReloadPlugin = require('webpack-livereload-plugin');
+var path = require('path');
+
+var LiveReloadPlugin = require('webpack-livereload-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+var APP_DIR = path.resolve(__dirname, 'src');
+var BUILD_DIR = path.resolve(__dirname, 'dist');
 
 module.exports = {
-  entry: './server/index.js',
+  entry: path.resolve(APP_DIR, 'index.jsx'),
   output: {
+    path: BUILD_DIR,
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'ui/dist')
-  },
-  context: __dirname,
-  resolve: {
-    extensions: ['.js', '.jsx', '.json', '*']
+    publicPath: '/'
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['react', 'es2015']
-        }
-      },
-      {
-        test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        test: /\.jsx$/,
+        use: 'babel-loader'
       }
     ]
   },
-  plugins: [new LiveReloadPlugin({appendScriptTag: true})]
+  plugins: [
+    new LiveReloadPlugin(),
+    new HtmlWebpackPlugin({
+      template: APP_DIR + '/index.html'
+    })
+  ],
+  resolve: {
+    extensions: ['.js', '.jsx']
+  }
 };
