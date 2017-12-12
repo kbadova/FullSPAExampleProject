@@ -1,16 +1,26 @@
 import React from 'react';
-import increment from './../actions/counterActions';
 import {Button} from 'reactstrap';
+import {connect} from 'react-redux';
+import {increment, decrement} from '../actions/counterActions';
 
-export default class Counter extends React.Component {
+class Counter extends React.Component {
   render() {
-    const {store} = this.props;
-    console.log('store in home', store);
+    const {counter} = this.props;
+    console.log('store in home', this.props);
+    console.log('increment', this.props.dispatch);
     return (
       <div>
-        <h1>Counter</h1>
-        {/*sads<Button onClick={store.dispatch({type: 'INCREMENT'})}>asdf</Button>*/}
+        <h1>Counter {counter.value}</h1>
+        <Button onClick={() => this.props.dispatch(increment)}> + </Button>
+        <Button onClick={() => this.props.dispatch(decrement)}> - </Button>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    counter: state.counter
+  };
+};
+export default connect(mapStateToProps)(Counter);

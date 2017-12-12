@@ -5,13 +5,16 @@ import {Provider} from 'react-redux';
 import allReducers from './reducers';
 
 import Counter from './components/Counter';
-import UsersList from './containers/UsersList'
+import UsersList from './containers/UsersList';
 
 const store = createStore(allReducers);
-console.log(store)
+console.log(store);
 ReactDOM.render(
   <Provider store={store}>
-    <UsersList />
+    <div>
+      <Counter />
+      <UsersList />
+    </div>
   </Provider>,
   document.getElementById('root')
 );

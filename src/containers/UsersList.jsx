@@ -1,29 +1,30 @@
-import React from 'react'
-import UserHeader from '../components/UserHeader'
-import Counter from '../components/Counter'
-import {connect} from 'react-redux'
+import React from 'react';
+import UserHeader from '../components/UserHeader';
+import Counter from '../components/Counter';
+import {connect} from 'react-redux';
 
 class UsersList extends React.Component {
-  render (){
-    const {users} = this.props
+  render() {
+    const {users} = this.props;
     return (
-
       <div>
-      {/*<Counter />*/}
-      <UserHeader/>
+        <UserHeader />
         <ul>
-      {users.map((user, index)=> 
-            <li key={index}>{index+1} {user.name} {user.age}</li>
-        )}
+          {users.map((user, index) => (
+            <li key={index}>
+              {index + 1} {user.name} {user.age}
+            </li>
+          ))}
         </ul>
-      </div>)
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
     users: state.users
-  }
+  };
 }
 
-export default connect(mapStateToProps)(UsersList)
+export default connect(mapStateToProps)(UsersList);

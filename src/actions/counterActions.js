@@ -1,11 +1,9 @@
-const increment = {
+export const increment = {
   type: 'INCREMENT',
   index: 1
 };
 
-const decrement = {
-  type: 'INCREMENT',
-  index: 1
+export const decrement = {
+  type: 'DECREMENT',
+  index: 2
 };
-
-export {increment, decrement};
