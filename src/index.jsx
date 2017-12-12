@@ -2,9 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import {counterReducer} from './reducers/counterReducer';
-import Home from './components/Home';
+import allReducers from './reducers';
 
-const store = createStore(counterReducer);
+import Counter from './components/Counter';
+import UsersList from './containers/UsersList'
 
-ReactDOM.render(<Home />, document.getElementById('root'));
+const store = createStore(allReducers);
+console.log(store)
+ReactDOM.render(
+  <Provider store={store}>
+    <UsersList />
+  </Provider>,
+  document.getElementById('root')
+);
