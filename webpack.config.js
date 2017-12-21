@@ -18,7 +18,8 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', 'scss'],
+    modules: [APP_DIR, 'node_modules']
   },
   module: {
     loaders: [
@@ -31,8 +32,19 @@ module.exports = {
         }
       },
       {
-        test: /\.scss/,
-        loader: 'style-loader!css-loader!sass-loader'
+        test: /\.scss$/,
+        include: [APP_DIR],
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
       }
     ]
   },
