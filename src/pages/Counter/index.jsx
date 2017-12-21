@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button} from 'reactstrap';
 import {connect} from 'react-redux';
-import {increment, decrement} from '../actions/counterActions';
+import {increment, decrement} from 'modules/counter';
 
 class Counter extends React.Component {
   render() {
@@ -11,8 +11,8 @@ class Counter extends React.Component {
     return (
       <div>
         <h1>Counter {counter.value}</h1>
-        <Button onClick={() => this.props.dispatch(increment)}> + </Button>
-        <Button onClick={() => this.props.dispatch(decrement)}> - </Button>
+        <Button onClick={() => this.props.increment()}> + </Button>
+        <Button onClick={() => this.props.decrement()}> - </Button>
       </div>
     );
   }
@@ -23,4 +23,12 @@ const mapStateToProps = state => {
     counter: state.counter
   };
 };
-export default connect(mapStateToProps)(Counter);
+
+const mapDispatchToProps = dispatch => {
+  return {
+    increment: () => dispatch(increment),
+    decrement: () => dispatch(decrement)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);

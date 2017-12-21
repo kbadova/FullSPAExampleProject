@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  .sidemenu {
+    border: 1px solid black;
+  }
+  .body {
+    flex: 1;
+    border: 1px solid black;
+  }
+}

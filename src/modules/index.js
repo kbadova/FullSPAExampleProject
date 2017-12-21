@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux';
 import usersReducer from './users';
-import counterReducer from './counterReducer';
+import counterReducer from './counter';
+import bookingsReducer from './bookings';
 
 const allReducers = combineReducers({
   users: usersReducer,
-  counter: counterReducer
+  counter: counterReducer,
+  bookings: bookingsReducer
 });
 
 export default allReducers;

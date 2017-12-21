@@ -1,0 +1,161 @@
+ВЪпроси:
+ - Как най-добре да си структурираме проекта?
+
+  /components - reusable components(и components и containers)
+    Chart
+    - index.js
+    - file, който fetch-wa данни, за да знаем кои данни ни трябват
+    - styles.scss
+
+    - правим го така, че ако решим да преместим цялата папка, тя ще върви
+ 
+  /modules  - 
+    [redujer].js -> той си дефинира action, reducer, actionCreator, selector, така че само този  reducer(не е нужно останалата част от систекмата да знае за тези неща), selectors(функция, която селектира какъв state  да вземем от reducer-a, и се вика в mapStatToProps(много удобно ако имаме много логика в mapStateToProps))
+
+  /pages
+  - index.js -> 
+  - routes.js -> (глобалния index.js зарежда routes.js)
+    => file с всички url paths
+  
+  /utils - обща логика - глобални фунцкии
+  - paths.js -> функции, които връщат string url-li, идеята е като искам да ползвам url-a, да го import-вам от 1 място и като го редактирам, да го редактрирам на едно място 
+
+
+  имаме 2 вида bundle -> 1вия e големия bundle с js и css, 2рия e bundle-a зa конкретна страница -> трябва всяка страница да си load-ва нейния bundle когато е поискан(server side rendering)
+
+  къде държите css-a -> styles.css
+
+
+ - Как да тестваме?
+
+
+ - Ако имаме обща логика, използваме HOC(или utils), а ако имаме общ jsx как и къде го изнасяме? FUnction COmponents? -> components или shared
+
+
+
+React.Component !== React.PureComponent -> предефиниран shouldComponentUpdate и по-бърз
+
+
+Ако искам да не си impоrt-вам ../../../Component/ 
+\
+мога да си направя .env и там да кажа NODE_PATH=/src и мога да импортвам вече:
+import COmponent from 'components/Other'
+
+
+routing -> `found`, `farce` router is nice
+
+
+
+className biblioteka -> css
+
+
+React portal -> за модали -> рендерира модала извън doma(not so sure)
+React-modal го ползва
+
+show modals + HOC
+
+wrapper-i за външни компоненти
+
+
+:global(leyalt{ widht:100}) -> прави leyalt clasa глобален 
+
+formi :star:
+
+<button onClick={() => console.log("asd")}/> -> ще извика shouldComponentUpdate всеки път защото console.log e winagi нова инстанция -> лошо
+
+
+1) componentWillReceiveProps -> дали да запише някакви нови props 
+2) sholdCOmponentUpdate -> пита дали да викне render-a изобщо
+
+
+Как да си подредя кога в 1 компонента:
+props
+state
+constructor
+liveCicle
+render
+handlders
+utils
+
+state-a като статична променлива, да не е в constructor -> няма нужда
+
+
+permission-и, закачат се properties на всеки обект след post(булевки) -> oprostqwa logikata
+
+withPage -> декоратор, показва Loading, когато fetch-не info
+
+producthunt
+
+GRAPHQL
+
+-принципно има 2 компонента: server - client(ruby не може да се справи синхронно с всички заявки и бави FE requests) -> което значи че ти трябват повече worker-i
+
+обикаля по 1 дърво от данни и връша всяко парчрнце от FE query-то
+фрагменти(kato spread оператора в js - subira kakwi danni mu trqbvat tochno i kakvi komponenti)
+wseki fragment nosi v sebe si danni i komponenta
+
+2рото яко нешо е ако използваме typeScript(или flowType), то няма да ме пусне ако променим някакво property 
+
+dabatabe layer -> bound-ва заявките към базата(нямаме рест апи, което да call-не bazata)
+
+по този начин всяка компонента знае формата на данните, които очаква
+ако искаме да постигнем това с rest api-> правиш  си схема, която се генерира от BE
+
+  можем за dev проекта да си export-нем схемата на BE и да си оптимизиране ci-a да гръмне ако има mismatch
+
+ библиотеки -> apolo
+
+ всяка компонента има следните неща:
+ components/button/fragment.graphql -> фрагмента какви данни са ни необходими
+ components/button/index,js
+ components/button/styles.css
+
+ components/query
+
+ graphql-a от apolo кешира инфото само
+
+ ако искаме да chainнем няколко quryta-> compose от apolo
+
+relay - библиотека и спецификация -> как да си design-нем graphql схемата
+ всеки обект, който се връша от апи-то може да се достъпи през base64 encoded id и през един end point д аможем да достъпим 1 обект, без да казвам винаги fetchUSers, fetchFRangemnt...
+ по този начин от към ФЕ страна fetchвам по  1 и съши начин!!
+ и вече be си прави неговите схеми как да decode-не id-to i da si vzeme pravilnoto neshto
+
+ connections -> ако трябнва да взема всички user-i
+ 1) naчин -“ pagination (primer: bezkaen scroll -> new feed na facebook)
+
+
+TESTS
+
+testvane na funkcii
+
+describe("swsfsf" () => {
+  it(()=> {
+    assert
+  })
+})
+
+import Component from './index' -> importvma komponentata kato "Component"m ako pro promenq imeto na komponenttata, da ne go promenqm v testa
+
+testvame che samiq kmponent se rendva
+
+import {shallow, mount} from enzyme
+shallon -> vrushat komponentat akato json
+mount -> izpolzva doma -> trqbvat ni eventi
+
+proverqvat dali komponentata se renderira
+
+zakacham data atributi, za da testvam po-dobre
+component.find("data-test-1").simulate("event")
+
+ako iskam da selectiram smao chast ot kompponentata
+expect(component.find(<field>sadsad</field>)).toContainReact(.......)
+
+
+
+ne assertvame kakvo ima v state-a,a assertvame povedenieto vurju reacta
+
+sinon.js -> dava ni spy/mock/stub/fake
+
+kniga: javascript testing recepies
+

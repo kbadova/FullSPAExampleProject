@@ -2,18 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import allReducers from './reducers';
+import reducers from './modules';
 
-import Counter from './components/Counter';
-import UsersList from './containers/UsersList';
+import Counter from './pages/Counter';
+import UserList from './pages/UserList';
+import BookingList from './pages/BookingList';
 
-const store = createStore(allReducers);
+const store = createStore(reducers);
 console.log(store);
+
 ReactDOM.render(
   <Provider store={store}>
     <div>
       <Counter />
-      <UsersList />
+      <UserList />
+      <BookingList />
     </div>
   </Provider>,
   document.getElementById('root')

@@ -1,7 +1,7 @@
 import React from 'react';
-import UserHeader from '../components/UserHeader';
-import Counter from '../components/Counter';
 import {connect} from 'react-redux';
+
+import UserHeader from 'components/UserHeader';
 
 class UsersList extends React.Component {
   render() {
@@ -21,10 +21,10 @@ class UsersList extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   return {
     users: state.users
   };
-}
+};
 
 export default connect(mapStateToProps)(UsersList);
